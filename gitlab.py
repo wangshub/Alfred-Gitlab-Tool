@@ -26,6 +26,14 @@ def get_gitlab_repos(url, token, page, result):
     return result
 
 
+def search_for_project(project):
+    """Generate a string search key for a project"""
+    elements = []
+    elements.append(project['name_with_namespace'])
+    elements.append(project['path_with_namespace'])
+    return u' '.join(elements)
+
+
 def main(wf):
     # command line parser
     parser = argparse.ArgumentParser()
@@ -51,22 +59,35 @@ def main(wf):
         wf.save_password('gitlab_url', args.url)
         return 0
 
-    gitlab_token = wf.get_password('gitlab_token')
-    gitlab_url = wf.get_password('gitlab_url')
-    # log.info(gitlab_token)
-    # log.info(gitlab_url)
+    # gitlab_token = wf.get_password('gitlab_token')
+    # gitlab_url = wf.get_password('gitlab_url')
+    # projects = get_gitlab_repos(gitlab_url, gitlab_token, 1, [])
 
-    projects = get_gitlab_repos(gitlab_url, gitlab_token, 1, [])
-    # projects = wf.filter(query, projects, key=search_for_project, min_score=20)
+    projects = wf.cached_data('gitlab_projects', max_age=0)
+    log.info('total projects = '+str(len(projects)))
 
-    log.info('total = ' + str(len(projects)))
-    for proj in projects:
-        wf.add_item(title=proj['name_with_namespace'],
-                    subtitle=proj['path_with_namespace'],
-                    arg=proj['web_url'],
-                    valid=True,
-                    icon=None,
-                    uid=proj['id'])
+    # update gitlab api data
+    # if not wf.cached_data_fresh('gitlab_projects', max_age=3600) and not is_running('gitlab_update'):
+    #     cmd = ['/usr/bin/python', wf.workflowfile('update.py')]
+    #     run_in_background('gitlab_update', cmd)
+    #     wf.rerun = 0.
+
+    # if query and projects:
+    #     projects = wf.filter(query, projects, key=search_for_project, min_score=20)
+    #
+    # if not projects:
+    #     wf.add_item('No projects found', icon=ICON_WARNING)
+    #     wf.send_feedback()
+    #     return 0
+    #
+    #
+    # for proj in projects:
+    #     wf.add_item(title=proj['name_with_namespace'],
+    #                 subtitle=proj['path_with_namespace'],
+    #                 arg=proj['web_url'],
+    #                 valid=True,
+    #                 icon=None,
+    #                 uid=proj['id'])
     wf.send_feedback()
 
 
