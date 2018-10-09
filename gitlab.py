@@ -67,27 +67,26 @@ def main(wf):
     log.info('total projects = '+str(len(projects)))
 
     # update gitlab api data
-    # if not wf.cached_data_fresh('gitlab_projects', max_age=3600) and not is_running('gitlab_update'):
-    #     cmd = ['/usr/bin/python', wf.workflowfile('update.py')]
-    #     run_in_background('gitlab_update', cmd)
-    #     wf.rerun = 0.
+    if not wf.cached_data_fresh('gitlab_projects', max_age=3600) and not is_running('gitlab_update'):
+        cmd = ['/usr/bin/python', wf.workflowfile('update.py')]
+        run_in_background('gitlab_update', cmd)
+        wf.rerun = 0.
 
-    # if query and projects:
-    #     projects = wf.filter(query, projects, key=search_for_project, min_score=20)
-    #
-    # if not projects:
-    #     wf.add_item('No projects found', icon=ICON_WARNING)
-    #     wf.send_feedback()
-    #     return 0
-    #
-    #
-    # for proj in projects:
-    #     wf.add_item(title=proj['name_with_namespace'],
-    #                 subtitle=proj['path_with_namespace'],
-    #                 arg=proj['web_url'],
-    #                 valid=True,
-    #                 icon=None,
-    #                 uid=proj['id'])
+    if query and projects:
+        projects = wf.filter(query, projects, key=search_for_project, min_score=20)
+
+    if not projects:
+        wf.add_item('No projects found', icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
+
+    for proj in projects:
+        wf.add_item(title=proj['name_with_namespace'],
+                    subtitle=proj['path_with_namespace'],
+                    arg=proj['web_url'],
+                    valid=True,
+                    icon=None,
+                    uid=proj['id'])
     wf.send_feedback()
 
 
