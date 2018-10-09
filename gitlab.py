@@ -20,28 +20,13 @@ def get_gitlab_repos(url, token, page, result):
     r = web.get(url, params)
     r.raise_for_status()
     result = result + r.json()
-
     next_page = r.headers.get('X-Next-Page')
-    log.info(next_page)
     if next_page:
         result = get_gitlab_repos(url, token, next_page, result)
-
     return result
 
 
-def get_gitlab_repo_test(url, token, page):
-    url = url + '/projects'
-    params = dict(private_token=token, per_page=100, page=page, membership='true')
-    r = web.get(url, params)
-    # log.info(r.text)
-    nextpage = r.headers.get('X-Next-Page')
-    log.info(nextpage)
-    r.raise_for_status()
-    return r.json
-
-
 def main(wf):
-
     # command line parser
     parser = argparse.ArgumentParser()
     parser.add_argument('--token', dest='token', nargs='?', default=None)
@@ -53,6 +38,8 @@ def main(wf):
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
     log.info(args)
+
+    query = args.query
 
     if args.token:
         log.info('Setting gitlab token {}'.format(args.token))
@@ -66,13 +53,21 @@ def main(wf):
 
     gitlab_token = wf.get_password('gitlab_token')
     gitlab_url = wf.get_password('gitlab_url')
+    # log.info(gitlab_token)
+    # log.info(gitlab_url)
 
-    log.info(gitlab_token)
-    log.info(gitlab_url)
+    projects = get_gitlab_repos(gitlab_url, gitlab_token, 1, [])
+    # projects = wf.filter(query, projects, key=search_for_project, min_score=20)
 
-    results = get_gitlab_repos(gitlab_url, gitlab_token, 1, [])
-    # results = get_gitlab_repo_test(gitlab_url, gitlab_token, 1)
-    log.info('total = ' + str(len(results)))
+    log.info('total = ' + str(len(projects)))
+    for proj in projects:
+        wf.add_item(title=proj['name_with_namespace'],
+                    subtitle=proj['path_with_namespace'],
+                    arg=proj['web_url'],
+                    valid=True,
+                    icon=None,
+                    uid=proj['id'])
+    wf.send_feedback()
 
 
 if __name__ == u"__main__":
