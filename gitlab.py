@@ -6,8 +6,6 @@ from workflow import Workflow3, ICON_WEB, ICON_WARNING, ICON_INFO, web, Password
 from workflow.background import run_in_background, is_running
 
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-# from lib import gitlab
-
 
 log = None
 
@@ -42,7 +40,7 @@ def main(wf):
     parser.add_argument('--repo', dest='repo', nargs='?', default=None)
     parser.add_argument('--issue', dest='issue', nargs='?', default=None)
     parser.add_argument('--merge', dest='merge', nargs='?', default=None)
-    parser.add_argument('--todo', dest='todo', nargs='?', default=None)
+    parser.add_argument('--todo', dest='todo', action='store_true', default=False)
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
     log.info(args)
@@ -59,9 +57,14 @@ def main(wf):
         wf.save_password('gitlab_url', args.url)
         return 0
 
-    # gitlab_token = wf.get_password('gitlab_token')
-    # gitlab_url = wf.get_password('gitlab_url')
-    # projects = get_gitlab_repos(gitlab_url, gitlab_token, 1, [])
+    if args.todo:
+        url_todo = wf.get_password('gitlab_url').replace('/api/v4', '') + '/dashboard/todos'
+        wf.add_item(title='Open issues in browser',
+                    arg=url_todo,
+                    valid=True,
+                    icon=None)
+        wf.send_feedback()
+        return 0
 
     projects = wf.cached_data('gitlab_projects', max_age=0)
     log.info('total projects = '+str(len(projects)))
@@ -91,8 +94,6 @@ def main(wf):
 
 
 if __name__ == u"__main__":
-    wf = Workflow3(update_settings={
-        'github_slug': 'lukewaite/alfred-gitlab',
-    })
+    wf = Workflow3()
     log = wf.logger
     sys.exit(wf.run(main))
