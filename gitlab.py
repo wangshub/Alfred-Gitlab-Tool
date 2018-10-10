@@ -19,16 +19,33 @@ def search_for_project(project):
 
 
 def save_gitlab_token(wf, token):
+    """
+    save gitlab token
+    :param wf:
+    :param token:
+    :return:
+    """
     log.info('Setting gitlab token {}'.format(token))
     wf.save_password('gitlab_token', token)
 
 
 def save_gitlab_url(wf, url):
+    """
+    save gitlab url
+    :param wf:
+    :param url:
+    :return:
+    """
     log.info('Setting gitlab url {}'.format(url))
     wf.save_password('gitlab_url', url)
 
 
 def open_gitlab_todo(wf):
+    """
+    open gitlab todos url in default browser
+    :param wf:
+    :return:
+    """
     url_todo = wf.get_password('gitlab_url').replace('/api/v4', '') + '/dashboard/todos'
     wf.add_item(title='Open issues in browser',
                 arg=url_todo,
@@ -38,6 +55,12 @@ def open_gitlab_todo(wf):
 
 
 def search_gitlab_repo(wf, query):
+    """
+    search repo from cached data
+    :param wf:
+    :param query:
+    :return:
+    """
     projects = wf.cached_data('gitlab_projects', max_age=0)
     log.info('total projects = ' + str(len(projects)))
 
