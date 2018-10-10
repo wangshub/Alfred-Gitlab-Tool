@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- coding: UTF-8 -*-
 from os import sys, path
 import sys
 import argparse
@@ -90,6 +90,7 @@ def search_gitlab_repo(wf, query):
 
 
 def query_gitlab_issue(wf, query):
+    query = query.encode('utf-8')
     gitlab_token = wf.get_password('gitlab_token')
     gitlab_url = wf.get_password('gitlab_url')
     issues = get_gitlab_issue(gitlab_url, gitlab_token, query, 1, [])

@@ -1,5 +1,5 @@
-# encoding: utf-8
-
+# -*- coding: UTF-8 -*-
+import sys
 from workflow import web, Workflow3, PasswordNotFound
 
 
@@ -13,7 +13,7 @@ def get_projects(token, url):
 
 def get_gitlab_repos(url, token, page, result):
     if page == 1:
-        url = url + '/projects'
+        url = url.encode('utf-8') + '/projects'
     log.info('Fetching {url} page {page}'.format(url=url, page=page))
     params = dict(private_token=token, per_page=100, page=page)
     r = web.get(url, params)
@@ -27,7 +27,7 @@ def get_gitlab_repos(url, token, page, result):
 
 def get_gitlab_issue(url, token, query, page, result):
     if page == 1:
-        url = url + '/search?scope=issues&search={}'.format(query)
+        url = url.encode('utf-8') + '/search?scope=issues&search='+query
     params = dict(private_token=token, per_page=100, page=page)
     r = web.get(url, params)
     r.raise_for_status()
