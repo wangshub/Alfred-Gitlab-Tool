@@ -208,9 +208,9 @@
 				<key>scriptfile</key>
 				<string></string>
 				<key>subtext</key>
-				<string></string>
+				<string>Search gitlab issues</string>
 				<key>title</key>
-				<string>Open assigned issues</string>
+				<string>Search gitlab issues</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>

@@ -2,6 +2,7 @@
 from os import sys, path
 import sys
 import argparse
+from gitlab import get_gitlab_issue
 from workflow import Workflow3, ICON_WEB, ICON_WARNING, ICON_INFO, web, PasswordNotFound
 from workflow.background import run_in_background, is_running
 
@@ -88,6 +89,20 @@ def search_gitlab_repo(wf, query):
     wf.send_feedback()
 
 
+def query_gitlab_issue(wf, query):
+    gitlab_token = wf.get_password('gitlab_token')
+    gitlab_url = wf.get_password('gitlab_url')
+    issues = get_gitlab_issue(gitlab_url, gitlab_token, query, 1, [])
+    for issue in issues:
+        wf.add_item(title=issue['title'],
+                    subtitle=issue['description'],
+                    arg=issue['web_url'],
+                    valid=True,
+                    icon=None,
+                    uid=issue['id'])
+    wf.send_feedback()
+
+
 def main(wf):
     # command line parser
     parser = argparse.ArgumentParser()
@@ -115,6 +130,10 @@ def main(wf):
 
     if args.repo:
         search_gitlab_repo(wf, args.repo)
+        return 0
+
+    if args.issue:
+        query_gitlab_issue(wf, args.issue)
         return 0
 
 

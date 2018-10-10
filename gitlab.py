@@ -25,6 +25,19 @@ def get_gitlab_repos(url, token, page, result):
     return result
 
 
+def get_gitlab_issue(url, token, query, page, result):
+    if page == 1:
+        url = url + '/search?scope=issues&search={}'.format(query)
+    params = dict(private_token=token, per_page=100, page=page)
+    r = web.get(url, params)
+    r.raise_for_status()
+    result = result + r.json()
+    next_page = r.headers.get('X-Next-Page')
+    if next_page:
+        result = get_gitlab_issue(url, token, query, next_page, result)
+    return result
+
+
 def main(wf):
     try:
         gitlab_token = wf.get_password('gitlab_token')
@@ -36,7 +49,6 @@ def main(wf):
             return get_projects(gitlab_token, gitlab_url)
 
         projects = wf.cached_data('gitlab_projects', wrapper, max_age=3600)
-
         # log.info('total gitlab projects = ' + str(len(projects)))
 
         # Record our progress in the log file
