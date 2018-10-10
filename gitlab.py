@@ -10,20 +10,6 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
 log = None
 
 
-def get_gitlab_repos(url, token, page, result):
-    if page == 1:
-        url = url + '/projects'
-    log.info('Fetching {url} page {page}'.format(url=url, page=page))
-    params = dict(private_token=token, per_page=100, page=page)
-    r = web.get(url, params)
-    r.raise_for_status()
-    result = result + r.json()
-    next_page = r.headers.get('X-Next-Page')
-    if next_page:
-        result = get_gitlab_repos(url, token, next_page, result)
-    return result
-
-
 def search_for_project(project):
     """Generate a string search key for a project"""
     elements = []
