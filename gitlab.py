@@ -18,42 +18,28 @@ def search_for_project(project):
     return u' '.join(elements)
 
 
-def main(wf):
-    # command line parser
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--token', dest='token', nargs='?', default=None)
-    parser.add_argument('--url', dest='url', nargs='?', default=None)
-    parser.add_argument('--repo', dest='repo', nargs='?', default=None)
-    parser.add_argument('--issue', dest='issue', nargs='?', default=None)
-    parser.add_argument('--merge', dest='merge', nargs='?', default=None)
-    parser.add_argument('--todo', dest='todo', action='store_true', default=False)
-    parser.add_argument('query', nargs='?', default=None)
-    args = parser.parse_args(wf.args)
-    log.info(args)
+def save_gitlab_token(wf, token):
+    log.info('Setting gitlab token {}'.format(token))
+    wf.save_password('gitlab_token', token)
 
-    query = args.query
 
-    if args.token:
-        log.info('Setting gitlab token {}'.format(args.token))
-        wf.save_password('gitlab_token', args.token)
-        return 0
+def save_gitlab_url(wf, url):
+    log.info('Setting gitlab url {}'.format(url))
+    wf.save_password('gitlab_url', url)
 
-    if args.url:
-        log.info('Setting gitlab url {}'.format(args.url))
-        wf.save_password('gitlab_url', args.url)
-        return 0
 
-    if args.todo:
-        url_todo = wf.get_password('gitlab_url').replace('/api/v4', '') + '/dashboard/todos'
-        wf.add_item(title='Open issues in browser',
-                    arg=url_todo,
-                    valid=True,
-                    icon=None)
-        wf.send_feedback()
-        return 0
+def open_gitlab_todo(wf):
+    url_todo = wf.get_password('gitlab_url').replace('/api/v4', '') + '/dashboard/todos'
+    wf.add_item(title='Open issues in browser',
+                arg=url_todo,
+                valid=True,
+                icon=None)
+    wf.send_feedback()
 
+
+def search_gitlab_repo(wf, query):
     projects = wf.cached_data('gitlab_projects', max_age=0)
-    log.info('total projects = '+str(len(projects)))
+    log.info('total projects = ' + str(len(projects)))
 
     # update gitlab api data
     if not wf.cached_data_fresh('gitlab_projects', max_age=3600) and not is_running('gitlab_update'):
@@ -77,6 +63,36 @@ def main(wf):
                     icon=None,
                     uid=proj['id'])
     wf.send_feedback()
+
+
+def main(wf):
+    # command line parser
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--token', dest='token', nargs='?', default=None)
+    parser.add_argument('--url', dest='url', nargs='?', default=None)
+    parser.add_argument('--repo', dest='repo', nargs='?', default=None)
+    parser.add_argument('--issue', dest='issue', nargs='?', default=None)
+    parser.add_argument('--merge', dest='merge', nargs='?', default=None)
+    parser.add_argument('--todo', dest='todo', action='store_true', default=False)
+    parser.add_argument('query', nargs='?', default=None)
+    args = parser.parse_args(wf.args)
+    log.info(args)
+
+    if args.token:
+        save_gitlab_token(wf, args.token)
+        return 0
+
+    if args.url:
+        save_gitlab_url(wf, args.url)
+        return 0
+
+    if args.todo:
+        open_gitlab_todo(wf)
+        return 0
+
+    if args.repo:
+        search_gitlab_repo(wf, args.repo)
+        return 0
 
 
 if __name__ == u"__main__":

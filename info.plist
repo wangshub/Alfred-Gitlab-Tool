@@ -139,7 +139,7 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
@@ -155,7 +155,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait ...</string>
 				<key>script</key>
-				<string>python gitlab.py "{query}"</string>
+				<string>python gitlab.py --repo "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -186,7 +186,7 @@
 				<key>argumenttrimmode</key>
 				<integer>0</integer>
 				<key>argumenttype</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
@@ -202,7 +202,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait ...</string>
 				<key>script</key>
-				<string>python gitlab.py "{query}"</string>
+				<string>python gitlab.py --issue "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
