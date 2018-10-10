@@ -90,6 +90,12 @@ def search_gitlab_repo(wf, query):
 
 
 def query_gitlab_issue(wf, query):
+    """
+    query gitlab issues
+    :param wf:
+    :param query:
+    :return:
+    """
     query = query.encode('utf-8')
     gitlab_token = wf.get_password('gitlab_token')
     gitlab_url = wf.get_password('gitlab_url')
