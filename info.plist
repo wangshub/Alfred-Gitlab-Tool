@@ -155,7 +155,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait ...</string>
 				<key>script</key>
-				<string>python gitlab.py --repo "{query}"</string>
+				<string>python main.py --repo "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -202,7 +202,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait ...</string>
 				<key>script</key>
-				<string>python gitlab.py --issue "{query}"</string>
+				<string>python main.py --issue "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -287,7 +287,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait ...</string>
 				<key>script</key>
-				<string>python gitlab.py --todo "{query}"</string>
+				<string>python main.py --todo "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -358,7 +358,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python gitlab.py --token "{query}"</string>
+				<string>python main.py --token "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -381,7 +381,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>python gitlab.py --url "{query}"</string>
+				<string>python main.py --url "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -483,7 +483,7 @@
 			<key>xpos</key>
 			<integer>110</integer>
 			<key>ypos</key>
-			<integer>570</integer>
+			<integer>560</integer>
 		</dict>
 		<key>8CEA566D-1206-4BCD-B4B6-98744ED00ACB</key>
 		<dict>
@@ -511,14 +511,14 @@
 			<key>xpos</key>
 			<integer>550</integer>
 			<key>ypos</key>
-			<integer>570</integer>
+			<integer>560</integer>
 		</dict>
 		<key>B6427010-7B56-4342-B5AC-85D22C5E5C50</key>
 		<dict>
 			<key>xpos</key>
 			<integer>340</integer>
 			<key>ypos</key>
-			<integer>570</integer>
+			<integer>560</integer>
 		</dict>
 		<key>C3C3143C-7AA7-47E0-953C-80F6D8FAD7BF</key>
 		<dict>
