@@ -22,6 +22,10 @@ Download [workflow release](https://github.com/wangshub/Alfred-Gitlab-Tool/relea
 
 ![](./pic/glp.png)
 
+- `glm`: Navigate Gitlab merge requests assigned to you.
+
+![](./pic/glm.png)
+
 - `gli`: Search Gitlab issues via API.
 
 ![](./pic/gli.png)

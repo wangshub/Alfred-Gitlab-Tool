@@ -128,7 +128,8 @@ def get_gitlab_mr_assigned(wf):
         wf.send_feedback()
         return 0
     for merge in merges:
-        wf.add_item(title=merge['title'],
+        title =merge['title'] + ' @ ' + merge['author']['username']
+        wf.add_item(title,
                     subtitle=merge['description'],
                     arg=merge['web_url'],
                     valid=True,
