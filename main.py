@@ -63,7 +63,6 @@ def search_gitlab_repo(wf, query):
     :return:
     """
     projects = wf.cached_data('gitlab_projects', max_age=0)
-    log.info('total projects = ' + str(len(projects)))
 
     # update gitlab api data
     if not wf.cached_data_fresh('gitlab_projects', max_age=3600) and not is_running('gitlab_update'):
