@@ -20,7 +20,7 @@ Download [workflow release](https://github.com/wangshub/Alfred-Gitlab-Tool/relea
 
 - `glp`: Fuzzy search Gitlab projects.
 
-![](./pic/glr.png)
+![](./pic/glp.png)
 
 - `gli`: Search Gitlab issues via API.
 
