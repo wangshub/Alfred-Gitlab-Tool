@@ -103,6 +103,12 @@ def query_gitlab_issue(wf, query):
     gitlab_token = wf.get_password('gitlab_token')
     gitlab_url = wf.get_password('gitlab_url')
     issues = get_gitlab_issue(gitlab_url, gitlab_token, query, 1, [])
+
+    if not issues:
+        wf.add_item('No issues found', icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
+
     for issue in issues:
         wf.add_item(title=issue['title'],
                     subtitle=issue['description'],
