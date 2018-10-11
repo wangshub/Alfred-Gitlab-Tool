@@ -4,7 +4,9 @@ When I want to search gitlab projects in Alfred quickly, I found [lukewaite/alfr
 
 ## Install
 
-Download [workflow release](https://github.com/wangshub/Alfred-Gitlab-Tool/releases)
+- Dependency [Alfred3](https://www.alfredapp.com/)
+- Download [Gitlab workflow release](https://github.com/wangshub/Alfred-Gitlab-Tool/releases)
+- Click to install.
 
 ### Configure
 
@@ -37,7 +39,7 @@ Download [workflow release](https://github.com/wangshub/Alfred-Gitlab-Tool/relea
 ## Thanks
 
 - Inspired by [lukewaite/alfred-gitlab](https://github.com/lukewaite/alfred-gitlab).
-- [alfred-workflow](http://www.deanishe.net/alfred-workflow/) python libary.
+- [alfred-workflow](http://www.deanishe.net/alfred-workflow/) Python libary.
 
 ## License
 
