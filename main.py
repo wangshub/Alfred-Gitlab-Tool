@@ -48,7 +48,7 @@ def open_gitlab_todo(wf):
     :return:
     """
     url_todo = wf.get_password('gitlab_url').replace('/api/v4', '') + '/dashboard/todos'
-    wf.add_item(title='Open issues in browser',
+    wf.add_item(title='Open gitlab todo in default browser',
                 arg=url_todo,
                 valid=True,
                 icon=None)
@@ -80,8 +80,11 @@ def search_gitlab_repo(wf, query):
         return 0
 
     for proj in projects:
+        subtitle = "issue:{0: <3} star:{1: <3} fork:{2: <3}".format(proj['open_issues_count'],
+                                                                     proj['star_count'],
+                                                                     proj['forks_count'])
         wf.add_item(title=proj['name_with_namespace'],
-                    subtitle=proj['path_with_namespace'],
+                    subtitle=subtitle,
                     arg=proj['web_url'],
                     valid=True,
                     icon=None,
