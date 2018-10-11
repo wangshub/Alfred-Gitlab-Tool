@@ -1,6 +1,6 @@
 # Alfred Gitlab Tool
 
-When I want to search gitlab projects in Alfred quickly, I found [lukewaite/alfred-gitlab](https://github.com/lukewaite/alfred-gitlab). But it can not work... So I fixed some bugs and add more features.
+> When I want to search gitlab projects in Alfred quickly, I found [lukewaite/alfred-gitlab](https://github.com/lukewaite/alfred-gitlab). But it can not work... So I fixed some bugs and add more features.
 
 ## Install
 
@@ -10,31 +10,35 @@ When I want to search gitlab projects in Alfred quickly, I found [lukewaite/alfr
 
 ### Configure
 
-- `glurl`: Set Gitlab url.
+- **`glurl`: Set Gitlab url.**
 
 ![](./pic/glurl.png)
 
-- `gltoken`: Set Gitlab token.
+- **`gltoken`: Set Gitlab token.**
 
 ![](./pic/gltoken.png)
 
 ### Feature
 
-- `glp`: Fuzzy search Gitlab projects.
+- **`glp`: Fuzzy search Gitlab projects.**
 
 ![](./pic/glp.png)
 
-- `glm`: Navigate Gitlab merge requests assigned to you.
+- **`glm`: Navigate Gitlab merge requests assigned to you.**
 
 ![](./pic/glm.png)
 
-- `gli`: Search Gitlab issues via API.
+- **`gli`: Search Gitlab issues via API.**
 
 ![](./pic/gli.png)
 
-- `gltodo`: Open Gitlab todos in browser.
+- **`gltodo`: Open Gitlab todos in browser.**
 
 ![](./pic/gltodo.png)
+
+## Question
+
+All pull requests, issues and ideas are welcome.
 
 ## Thanks
 
