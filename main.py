@@ -2,7 +2,7 @@
 from os import sys, path
 import sys
 import argparse
-from gitlab import get_gitlab_issue
+from gitlab import get_gitlab_issue, get_gitlab_merge_requests
 from workflow import Workflow3, ICON_WEB, ICON_WARNING, ICON_INFO, web, PasswordNotFound
 from workflow.background import run_in_background, is_running
 
@@ -119,6 +119,24 @@ def query_gitlab_issue(wf, query):
     wf.send_feedback()
 
 
+def get_gitlab_mr_assigned(wf):
+    gitlab_token = wf.get_password('gitlab_token')
+    gitlab_url = wf.get_password('gitlab_url')
+    merges = get_gitlab_merge_requests(gitlab_url, gitlab_token, 1, [])
+    if not merges:
+        wf.add_item('No issues found', icon=ICON_WARNING)
+        wf.send_feedback()
+        return 0
+    for merge in merges:
+        wf.add_item(title=merge['title'],
+                    subtitle=merge['description'],
+                    arg=merge['web_url'],
+                    valid=True,
+                    icon=None,
+                    uid=merge['id'])
+    wf.send_feedback()
+
+
 def main(wf):
     # command line parser
     parser = argparse.ArgumentParser()
@@ -126,7 +144,7 @@ def main(wf):
     parser.add_argument('--url', dest='url', nargs='?', default=None)
     parser.add_argument('--repo', dest='repo', nargs='?', default=None)
     parser.add_argument('--issue', dest='issue', nargs='?', default=None)
-    parser.add_argument('--merge', dest='merge', nargs='?', default=None)
+    parser.add_argument('--merge', dest='merge', action='store_true', default=False)
     parser.add_argument('--todo', dest='todo', action='store_true', default=False)
     parser.add_argument('query', nargs='?', default=None)
     args = parser.parse_args(wf.args)
@@ -150,6 +168,10 @@ def main(wf):
 
     if args.issue:
         query_gitlab_issue(wf, args.issue)
+        return 0
+
+    if args.merge:
+        get_gitlab_mr_assigned(wf)
         return 0
 
 

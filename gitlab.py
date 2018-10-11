@@ -38,6 +38,23 @@ def get_gitlab_issue(url, token, query, page, result):
     return result
 
 
+def get_gitlab_merge_requests(url, token, page, result):
+    if page == 1:
+        url = url.encode('utf-8') + '/merge_requests'
+    params = dict(private_token=token,
+                  per_page=100,
+                  page=page,
+                  scope='assigned_to_me',
+                  state='opened')
+    r = web.get(url, params)
+    r.raise_for_status()
+    result = result + r.json()
+    next_page = r.headers.get('X-Next-Page')
+    if next_page:
+        get_gitlab_merge_requests(url, token, query, next_page, result)
+    return result
+
+
 def main(wf):
     try:
         gitlab_token = wf.get_password('gitlab_token')

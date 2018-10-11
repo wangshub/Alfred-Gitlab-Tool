@@ -99,6 +99,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E780650D-E8CD-434B-AACC-7F96E8F7AD3C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>B12B07B3-1ADC-4677-8D9B-050AC916DF49</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>wangshub</string>
@@ -125,9 +138,75 @@
 			<key>type</key>
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
+			<string>B12B07B3-1ADC-4677-8D9B-050AC916DF49</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
 			<string>9C524F85-B372-4FD7-9189-56B8585F3888</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>glm</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Please wait ...</string>
+				<key>script</key>
+				<string>python main.py --merge "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Open merge  requests assigned to you.</string>
+				<key>title</key>
+				<string>Open merge  requests assigned to you.</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>E780650D-E8CD-434B-AACC-7F96E8F7AD3C</string>
+			<key>version</key>
+			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -513,6 +592,13 @@
 			<key>ypos</key>
 			<integer>560</integer>
 		</dict>
+		<key>B12B07B3-1ADC-4677-8D9B-050AC916DF49</key>
+		<dict>
+			<key>xpos</key>
+			<integer>750</integer>
+			<key>ypos</key>
+			<integer>80</integer>
+		</dict>
 		<key>B6427010-7B56-4342-B5AC-85D22C5E5C50</key>
 		<dict>
 			<key>xpos</key>
@@ -524,6 +610,13 @@
 		<dict>
 			<key>xpos</key>
 			<integer>110</integer>
+			<key>ypos</key>
+			<integer>80</integer>
+		</dict>
+		<key>E780650D-E8CD-434B-AACC-7F96E8F7AD3C</key>
+		<dict>
+			<key>xpos</key>
+			<integer>520</integer>
 			<key>ypos</key>
 			<integer>80</integer>
 		</dict>
