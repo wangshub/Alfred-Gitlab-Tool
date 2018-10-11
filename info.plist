@@ -519,7 +519,12 @@
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>glurl: Set Gitlab url.
+gltoken: Set Gitlab token.
+glp: Fuzzy search Gitlab projects.
+glm: Navigate Gitlab merge requests assigned to you.
+gli: Search Gitlab issues via API.
+gltodo: Open Gitlab todos in browser.</string>
 	<key>uidata</key>
 	<dict>
 		<key>07D583FC-AFE3-47D1-8076-FF78BE066E4E</key>
@@ -622,7 +627,7 @@
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>1.0.0</string>
+	<string>1.2.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/wangshub</string>
 </dict>
