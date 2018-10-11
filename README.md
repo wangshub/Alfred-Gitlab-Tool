@@ -1,6 +1,6 @@
 # Alfred Gitlab Tool
 
-> When I want to search gitlab projects in Alfred quickly, I found [lukewaite/alfred-gitlab](https://github.com/lukewaite/alfred-gitlab). But it can not work... So I fixed some bugs and add more features.
+Alfred Gitlab dashboard workflow. Navigate projects, issues, merges and todos quickly. 
 
 ## Install
 
