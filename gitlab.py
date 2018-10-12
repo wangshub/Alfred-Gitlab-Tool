@@ -44,14 +44,14 @@ def get_gitlab_merge_requests(url, token, page, result):
     params = dict(private_token=token,
                   per_page=100,
                   page=page,
-                  scope='assigned_to_me',
+                  scope='assigned-to-me',
                   state='opened')
     r = web.get(url, params)
     r.raise_for_status()
     result = result + r.json()
     next_page = r.headers.get('X-Next-Page')
     if next_page:
-        get_gitlab_merge_requests(url, token, query, next_page, result)
+        get_gitlab_merge_requests(url, token, next_page, result)
     return result
 
 
