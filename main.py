@@ -79,9 +79,12 @@ def search_gitlab_repo(wf, query):
         return 0
 
     for proj in projects:
-        subtitle = "issue:{0: <3} star:{1: <3} fork:{2: <3}".format(proj['open_issues_count'],
+        if proj['issues_enabled']:
+            subtitle = "issue:{0: <3} star:{1: <3} fork:{2: <3}".format(proj['open_issues_count'],
                                                                     proj['star_count'],
                                                                     proj['forks_count'])
+        else:
+            subtitle = ""
         wf.add_item(title=proj['name_with_namespace'],
                     subtitle=subtitle,
                     arg=proj['web_url'],
